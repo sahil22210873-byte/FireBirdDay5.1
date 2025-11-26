@@ -4,47 +4,40 @@ using UnityEngine;
 public class IntroSceneController : MonoBehaviour
 {
     [Header("References")]
-    public AudioSource introAudio;       // IntroAudio object
-    public GameObject letsGoButton;      // UI Button gameObject (set inactive in inspector)
-    public Animator gateAnimator;        // Animator controlling the gate (or parent)
-    public Transform player;             // Player or XR Rig transform
+    public AudioSource introAudio;
+    public GameObject canvas;
+    public Animator gateAnimator;
+    public Transform player;
 
     [Header("Trigger")]
-    public Collider doorTriggerCollider; // assign DoorCloseTrigger's collider (optional)
+    public Collider doorTriggerCollider;
 
     bool gateOpened = false;
     bool gateClosed = false;
 
     void Start()
     {
-        // ensure button hidden
-        if (letsGoButton != null) letsGoButton.SetActive(false);
+        if (canvas != null) canvas.SetActive(false);
 
-        // Play intro audio (if not already playing)
         if (introAudio != null)
         {
             introAudio.Play();
-            StartCoroutine(ShowButtonAfterAudio());
+            StartCoroutine(ShowCanvasAfterAudio());
         }
         else
         {
-            // fallback: show immediately
-            if (letsGoButton != null) letsGoButton.SetActive(true);
+            if (canvas != null) canvas.SetActive(true);
         }
     }
 
-    IEnumerator ShowButtonAfterAudio()
+    IEnumerator ShowCanvasAfterAudio()
     {
-        // Wait until audio finished (handles clip length accurately)
         yield return new WaitWhile(() => introAudio != null && introAudio.isPlaying);
-
-        // slight delay to make it feel polished
         yield return new WaitForSeconds(0.25f);
 
-        if (letsGoButton != null) letsGoButton.SetActive(true);
+        if (canvas != null) canvas.SetActive(true);
     }
 
-    // Called by the button's OnClick event
     public void OnLetsGoClicked()
     {
         if (gateAnimator != null)
@@ -53,11 +46,9 @@ public class IntroSceneController : MonoBehaviour
             gateOpened = true;
         }
 
-        // Hide button after clicked
-        if (letsGoButton != null) letsGoButton.SetActive(false);
+        if (canvas != null) canvas.SetActive(false);
     }
 
-    // This function will be called by DoorCloseTrigger script when player enters
     public void PlayerEnteredDoorway()
     {
         if (gateOpened && !gateClosed)
