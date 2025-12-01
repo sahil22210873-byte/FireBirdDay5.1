@@ -1,0 +1,11 @@
+Model Information:
+* title:	Photovoltaic Panels
+* source:	https://sketchfab.com/3d-models/photovoltaic-panels-cc9b7d59031e44ddb873056effece590
+* author:	mfb64 (https://sketchfab.com/mfb64)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Photovoltaic Panels" (https://sketchfab.com/3d-models/photovoltaic-panels-cc9b7d59031e44ddb873056effece590) by mfb64 (https://sketchfab.com/mfb64) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
