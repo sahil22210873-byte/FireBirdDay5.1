@@ -4949,6 +4949,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 475418, guid: 1acd03bc537c24f3484ab4d6f07b9e02, type: 3}
   m_PrefabInstance: {fileID: 175156899}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &177880421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 177880423}
+  - component: {fileID: 177880422}
+  m_Layer: 0
+  m_Name: Voiceover_trigger2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &177880422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177880421}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.439958, y: 1, z: 3.6118298}
+  m_Center: {x: -0.42342156, y: 0, z: 0.2115717}
+--- !u!4 &177880423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177880421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.66, y: 0.862, z: -28.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &181489954
 GameObject:
   m_ObjectHideFlags: 0
@@ -35657,6 +35710,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441616492}
   m_Mesh: {fileID: -3187893681741045438, guid: 0db760c6c78aa10439ff5ffdf40bd66d, type: 3}
+--- !u!1 &1450333334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1450333336}
+  - component: {fileID: 1450333335}
+  m_Layer: 0
+  m_Name: Voiceover_trigger3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1450333335
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450333334}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.994755, y: 1, z: 4.65143}
+  m_Center: {x: -0.6143445, y: 0, z: -0.30451488}
+--- !u!4 &1450333336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450333334}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.51, y: 0.862, z: -18.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1451832656
 GameObject:
   m_ObjectHideFlags: 0
@@ -50208,7 +50314,15 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'mixamorig4:Hips'\n\tTransform 'mixamorig4:RightHandMiddle2'\n\tTransform
+    'mixamorig4:LeftToeBase'\n\tTransform 'mixamorig4:LeftHandThumb2'\n\tTransform
+    'mixamorig4:RightHandRing2'\n\tTransform 'mixamorig4:RightToeBase'\n\tTransform
+    'mixamorig4:RightHandThumb1'\n\tTransform 'mixamorig4:RightArm'\n\tTransform
+    'mixamorig4:LeftHandIndex1'\n\tTransform 'mixamorig4:RightHandIndex3'\n\tand
+    more ...\n\tFrom animation clip 'walking'\n\tFrom animation clip 'stop walking'\n\tFrom
+    animation clip 'left turn'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -51670,7 +51784,7 @@ GameObject:
   - component: {fileID: 2070516833}
   - component: {fileID: 2070516832}
   m_Layer: 0
-  m_Name: DoorCloseTrigger
+  m_Name: DoorCloseAndVoiceOver1 Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51721,7 +51835,7 @@ Transform:
   m_GameObject: {fileID: 2070516831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.715, y: 1.13, z: -16.11}
+  m_LocalPosition: {x: -0.715, y: 1.13, z: -16.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51916,7 +52030,7 @@ Transform:
   m_GameObject: {fileID: 2072997426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.1607878, y: 1.094, z: -25.898706}
+  m_LocalPosition: {x: 10.63, y: 1.094, z: -25.898706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54273,3 +54387,5 @@ SceneRoots:
   - {fileID: 2070516834}
   - {fileID: 936771587}
   - {fileID: 131095216}
+  - {fileID: 177880423}
+  - {fileID: 1450333336}
