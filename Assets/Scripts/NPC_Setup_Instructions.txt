@@ -1,0 +1,137 @@
+NPC MOVEMENT AND ANIMATION SETUP INSTRUCTIONS - UPDATED
+========================================================
+
+⚠️ UPDATED FOR COMPLEX TURN & WALKING ANIMATIONS
+⚠️ NEW: NPC NOW FACES PLAYER WHEN IDLE
+
+Created Scripts:
+1. NPCMovementController.cs - Main NPC behavior controller (UPDATED)
+2. VoiceoverTrigger.cs - Trigger script for voiceover zones 2 and 3
+3. DoorTrigger.cs - Updated to work with NPC controller
+
+Additional Documentation:
+- UPDATED_Quick_Reference.txt - Latest features and settings with player tracking
+
+KEY FEATURES:
+-------------
+✓ Intelligent turn detection (chooses Left, Right, or 180 turn)
+✓ Three-stage walking (Start Walking → Walking Loop → Stop Walking)
+✓ Y-axis locked (movement only on X and Z planes)
+✓ Smooth animation transitions
+✓ Root motion compatible
+✓ NPC faces player when idle (NEW!)
+
+SETUP STEPS:
+------------
+
+STEP 1: Setup the NPC Character (Ch41_nonPBR)
+----------------------------------------------
+1. Select the Ch41_nonPBR GameObject in the hierarchy
+2. Add the NPCMovementController component
+3. Configure the following in the Inspector:
+
+   Movement Settings:
+   - Movement Speed: 1.5 (adjust for desired walk speed)
+   - Rotation Speed: 5
+   - Arrival Distance: 0.1
+
+   Target Positions:
+   - First Position: Drag "char_position_guidance1" GameObject here
+   - Second Position: Drag "char_position_guidance2" GameObject here
+
+   Animation Triggers (must match your Animator triggers):
+   - Wave Gesture Trigger: "Wave" (or your trigger name for wave gesture)
+   - Walk Trigger: "Walk" (or your trigger name for walking)
+   - Idle Trigger: "Idle" (or your trigger name for idle)
+
+   Voiceover Settings:
+   - Voiceover Audio Source: Create or assign an AudioSource component
+   - Voiceover Duration 1: 5 (seconds, adjust based on actual audio length)
+   - Voiceover Duration 2: 5 (seconds, adjust based on actual audio length)
+   - Voiceover Duration 3: 5 (seconds, adjust based on actual audio length)
+
+STEP 2: Setup DoorCloseAndVoiceOver1 Trigger
+---------------------------------------------
+1. Select "DoorCloseAndVoiceOver1 Trigger" in the hierarchy
+2. In the DoorTrigger component:
+   - NPC Controller: Drag "Ch41_nonPBR" GameObject here
+   - Audio Source: Assign an AudioSource (can be same as NPC's)
+   - Voiceover Clip: Assign the first voiceover audio clip
+   - Character Anim Delay: 2 (seconds to wait before starting)
+
+STEP 3: Setup Voiceover_trigger2
+---------------------------------
+1. Select "Voiceover_trigger2" in the hierarchy
+2. Add the VoiceoverTrigger component
+3. Configure:
+   - NPC Controller: Drag "Ch41_nonPBR" GameObject here
+   - Trigger Number: 2
+   - Audio Source: Assign an AudioSource (can be same as NPC's)
+   - Voiceover Clip: Assign the second voiceover audio clip
+
+STEP 4: Setup Voiceover_trigger3
+---------------------------------
+1. Select "Voiceover_trigger3" in the hierarchy
+2. Add the VoiceoverTrigger component
+3. Configure:
+   - NPC Controller: Drag "Ch41_nonPBR" GameObject here
+   - Trigger Number: 3
+   - Audio Source: Assign an AudioSource (can be same as NPC's)
+   - Voiceover Clip: Assign the third voiceover audio clip
+
+STEP 5: Setup Animator Controller
+----------------------------------
+You need to ensure your Animator (Ch41_nonPBR.controller) has these triggers:
+1. "Wave" - Triggers the wave and arm gesture animation
+2. "Walk" - Triggers the walking animation
+3. "Idle" - Triggers the idle animation (Standing W_Briefcase Idle)
+
+Animation State Machine Setup:
+- Create transitions from Any State or Entry to your animations using these triggers
+- Ensure the wave animation transitions to idle after completion
+- Walking animation should loop until idle trigger is called
+- Idle animation should loop continuously
+
+STEP 6: Audio Setup
+-------------------
+Option A - Shared AudioSource:
+1. Add an AudioSource component to Ch41_nonPBR
+2. Uncheck "Play On Awake"
+3. Assign this same AudioSource to all triggers
+
+Option B - Separate AudioSources:
+1. Create separate AudioSource components for each trigger
+2. Assign appropriate voiceover clips
+
+ANIMATION SEQUENCE FLOW:
+------------------------
+1. Player enters DoorCloseAndVoiceOver1 Trigger
+   → NPC plays wave gesture
+   → NPC waits in idle state
+   → Voiceover plays
+   → After voiceover ends, NPC walks to char_position_guidance1
+
+2. Player enters Voiceover_trigger2
+   → NPC plays wave gesture
+   → NPC waits in idle state
+   → Voiceover plays
+   → After voiceover ends, NPC walks to char_position_guidance2
+
+3. Player enters Voiceover_trigger3
+   → NPC plays wave gesture
+   → Voiceover plays
+   → NPC returns to idle state and stays there
+
+TESTING:
+--------
+1. Ensure all trigger colliders have "Is Trigger" enabled
+2. Make sure the Player or Camera has the "Player" or "MainCamera" tag
+3. Check Console for debug messages to track the sequence
+4. Adjust voiceover durations if using manual timing instead of AudioSource
+
+TROUBLESHOOTING:
+----------------
+- If NPC doesn't move: Check that target positions are assigned
+- If animations don't play: Verify trigger names match in Animator
+- If triggers don't activate: Check Player tag and trigger colliders
+- If voiceover doesn't play: Verify AudioSource and clips are assigned
