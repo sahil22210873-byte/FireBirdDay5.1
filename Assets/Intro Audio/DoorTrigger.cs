@@ -5,6 +5,9 @@ public class DoorTrigger : MonoBehaviour
 {
     public IntroSceneController introController;
     public Animator characterAnimator;
+    public NPCMovementController npcController;
+    public AudioClip voiceoverClip;
+    public AudioSource audioSource;
     public float characterAnimDelay = 2f;
 
     private bool hasTriggered = false;
@@ -27,8 +30,16 @@ public class DoorTrigger : MonoBehaviour
             if (introController != null)
             {
                 introController.PlayerEnteredDoorway();
-                StartCoroutine(StartCharacterAnimationAfterDelay());
             }
+
+            if (audioSource != null && voiceoverClip != null)
+            {
+                audioSource.clip = voiceoverClip;
+                audioSource.Play();
+                Debug.Log("Playing voiceover clip for first trigger");
+            }
+
+            StartCoroutine(StartCharacterAnimationAfterDelay());
         }
     }
 
@@ -37,9 +48,14 @@ public class DoorTrigger : MonoBehaviour
         Debug.Log($"Waiting {characterAnimDelay} seconds before starting character animation");
         yield return new WaitForSeconds(characterAnimDelay);
 
-        if (characterAnimator != null)
+        if (npcController != null)
         {
-            Debug.Log("Starting character animation NOW");
+            Debug.Log("Starting NPC animation sequence NOW");
+            npcController.OnPlayerEnteredFirstTrigger();
+        }
+        else if (characterAnimator != null)
+        {
+            Debug.Log("Starting character animation NOW (legacy mode)");
             characterAnimator.SetTrigger("StartAnimation");
         }
     }

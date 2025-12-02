@@ -1,0 +1,199 @@
+NEW FEATURE: NPC FACES PLAYER WHEN IDLE
+========================================
+
+WHAT'S NEW:
+-----------
+The NPC character now automatically and smoothly faces toward the player 
+whenever it is in an idle state. This creates more engaging and natural 
+interaction, making the NPC feel more alive and aware of the player's presence.
+
+HOW IT WORKS:
+-------------
+✓ Automatically detects player camera (XR Rig Main Camera or regular Main Camera)
+✓ Smoothly rotates the NPC to face player using Y-axis rotation only
+✓ Only active when NPC is truly idle (not moving, turning, or gesturing)
+✓ Disabled during all animations and movement for natural behavior
+✓ Lightweight - no performance impact
+
+WHEN PLAYER TRACKING IS ACTIVE:
+-------------------------------
+The NPC will face the player during:
+  ✓ Standing idle at start
+  ✓ Waiting for voiceover to finish
+  ✓ After completing wave/gesture animations
+  ✓ After arriving at waypoint destinations
+  ✓ Any time in idle animation state
+
+WHEN PLAYER TRACKING IS INACTIVE:
+---------------------------------
+The NPC will NOT track the player during:
+  ✗ Wave and arm gesture animations
+  ✗ Turn animations (Left, Right, 180)
+  ✗ Walking sequences (Start/Walk/Stop)
+  ✗ Movement between waypoints
+
+This ensures animations play naturally without interference.
+
+INSPECTOR SETTINGS:
+------------------
+In the NPCMovementController component, you'll find these new settings 
+under "Player Tracking" header:
+
+1. Player Transform (Transform)
+   - Auto-detected if left empty
+   - Manually assign if auto-detection fails
+   - Should point to Main Camera or XR Camera
+
+2. Idle Rotation Speed (Float, default: 2.0)
+   - How fast the NPC rotates to face player
+   - Lower values (1.0-1.5): Slower, more natural rotation
+   - Higher values (3.0-5.0): Faster, more responsive rotation
+   - Recommended: 2.0 for balanced behavior
+
+3. Face Player When Idle (Bool, default: ✓ Enabled)
+   - Toggle to enable/disable player tracking
+   - Uncheck to disable feature completely
+   - NPC will maintain forward direction when disabled
+
+AUTO-DETECTION:
+--------------
+The script automatically finds the player in this order:
+
+1. Checks if Player Transform is manually assigned in Inspector
+2. Searches for "XR Origin (XR Rig)/Camera Offset/Main Camera"
+3. Falls back to Camera.main (first camera tagged as MainCamera)
+4. Logs the found player name in Console
+5. Warns if no player found
+
+Console message on success:
+  "Auto-found player: Main Camera"
+
+Console message on failure:
+  "Player transform not found! Assign manually or ensure Camera is tagged as MainCamera"
+
+MANUAL ASSIGNMENT (if needed):
+------------------------------
+If auto-detection doesn't work:
+
+1. Select Ch41_nonPBR in Hierarchy
+2. Find NPCMovementController component
+3. Locate "Player Tracking" section
+4. Drag your Main Camera (or XR Camera) to "Player Transform" field
+
+EXAMPLE BEHAVIOR:
+----------------
+Scenario: Player enters first trigger
+
+1. NPC performs wave gesture
+   → NOT tracking player (animation playing)
+
+2. NPC returns to idle, waiting for voiceover
+   → TRACKING player (smoothly rotating to face them)
+   → Player can move around, NPC head/body follows
+
+3. Voiceover finishes, NPC calculates turn
+   → NOT tracking player (preparing for movement)
+
+4. NPC performs turn animation
+   → NOT tracking player (turn animation playing)
+
+5. NPC walks to waypoint
+   → NOT tracking player (focused on navigation)
+
+6. NPC arrives and returns to idle
+   → TRACKING player again (faces player naturally)
+
+CUSTOMIZATION:
+-------------
+Want slower, more subtle tracking?
+  → Set Idle Rotation Speed to 1.0 or 1.5
+
+Want instant snap-to-player?
+  → Set Idle Rotation Speed to 10.0 or higher (not recommended)
+
+Want tracking only at certain times?
+  → Keep enabled, it automatically disables during animations
+
+Don't want tracking at all?
+  → Uncheck "Face Player When Idle"
+
+TECHNICAL DETAILS:
+-----------------
+- Uses Quaternion.Slerp for smooth rotation
+- Only rotates on Y-axis (horizontal plane)
+- Runs in Update() only when conditions are met
+- No raycasts or physics calculations
+- Negligible performance cost
+- Works in VR and non-VR setups
+
+STATE TRACKING:
+--------------
+The script uses these internal states to control when tracking is active:
+
+- isInIdleState: true when in idle animation
+- isMoving: true when moving to waypoint
+- isTurning: true when playing turn animation
+- isGesturing: true when playing wave/gesture animation
+
+Player tracking only works when:
+  isInIdleState == true AND
+  isMoving == false AND
+  isTurning == false AND
+  isGesturing == false
+
+TROUBLESHOOTING:
+---------------
+Problem: NPC doesn't face player
+
+Solution 1: Check Console for auto-detection message
+  → Should see "Auto-found player: [name]"
+  → If not found, assign manually
+
+Solution 2: Verify "Face Player When Idle" is checked
+  → In Inspector, under Player Tracking section
+
+Solution 3: Manually assign player camera
+  → Drag Main Camera to Player Transform field
+
+Problem: NPC rotates during animations
+
+Solution: This shouldn't happen - tracking is disabled during animations
+  → Check Console for errors
+  → Verify animator is working correctly
+  → Ensure animation states are set up properly
+
+Problem: Rotation too fast/slow
+
+Solution: Adjust Idle Rotation Speed
+  → Default: 2.0
+  → Slower: 1.0-1.5
+  → Faster: 3.0-5.0
+
+Problem: NPC faces wrong direction
+
+Solution: Verify Player Transform is assigned to the camera
+  → Not to XR Origin root
+  → Not to Camera Offset
+  → Should be the actual Camera object
+
+TESTING:
+--------
+1. Enter Play Mode
+2. Check Console for "Auto-found player: [name]"
+3. Position yourself in front of NPC
+4. NPC should slowly rotate to face you
+5. Move to the side - NPC should follow
+6. Trigger a gesture - NPC should stop tracking
+7. After gesture - NPC should resume tracking
+
+If all these work, player tracking is functioning correctly!
+
+BENEFITS:
+---------
+✓ More engaging NPC interaction
+✓ NPC feels more aware and alive
+✓ Natural eye contact during conversation
+✓ Player feels acknowledged
+✓ Professional presentation quality
+✓ Zero performance impact
+✓ Works automatically with no manual scripting needed
