@@ -43,7 +43,7 @@ public class SolarPanelGameManager : MonoBehaviour
         {
             thicknessSlider.minValue = 0f;
             thicknessSlider.maxValue = 300f;
-            thicknessSlider.value = 10f;
+            thicknessSlider.value = 70f;
             thicknessSlider.onValueChanged.AddListener(OnThicknessChanged);
         }
     }
