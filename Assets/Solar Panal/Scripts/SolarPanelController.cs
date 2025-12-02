@@ -34,7 +34,7 @@ public class SolarPanelController : MonoBehaviour
     {
         InitializePanelParameters();
         idealThickness = LAMBDA / (4f * N_COATING);
-        currentThickness = 70f;
+        currentThickness = 10f;
     }
 
     private void InitializePanelParameters()
@@ -43,11 +43,11 @@ public class SolarPanelController : MonoBehaviour
         {
             case PanelType.MonoSi:
                 absorption = 0.90f;
-                targetPower = 0.90f;
+                targetPower = 0.89f;
                 break;
             case PanelType.PolySi:
                 absorption = 0.92f;
-                targetPower = 0.92f;
+                targetPower = 0.91f;
                 break;
             case PanelType.ThinFilm:
                 absorption = 0.95f;
